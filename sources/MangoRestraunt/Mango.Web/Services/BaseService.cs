@@ -16,7 +16,7 @@ namespace Mango.Web.Services
             _httpClient = httpClient;
         }
 
-        public async Task<T> SendAsync<T>(ApiRequest<T> apiRequest)
+        public async Task<T> SendAsync<T>(ApiRequest apiRequest)
         {
             try
             {

@@ -1,10 +1,22 @@
+using Mango.Web;
+using Mango.Web.Services;
+using Mango.Web.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
+#region dependencies
 // Add services to the container.
+builder.Services.AddHttpClient<IProductService, ProductService>();
+SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
+
+builder.Services.AddScoped<IProductService, ProductService>();
+
 builder.Services.AddControllersWithViews();
+#endregion
 
 var app = builder.Build();
 
+#region middleware
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -23,5 +35,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+#endregion
 
 app.Run();

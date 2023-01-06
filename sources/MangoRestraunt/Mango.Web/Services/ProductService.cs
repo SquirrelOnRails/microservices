@@ -16,7 +16,7 @@ namespace Mango.Web.Services
         {
             return await this.SendAsync<T>(new ApiRequest 
             {
-                Url = $"{SD.ProductAPIBase}/api/products",
+                Url = new Uri(new Uri(SD.ProductAPIBase), "api/products").ToString(),
                 Method = SD.ApiType.POST,
                 AccessToken = "",
                 Data = productDto
@@ -27,7 +27,7 @@ namespace Mango.Web.Services
         {
             return await this.SendAsync<T>(new ApiRequest
             {
-                Url = $"{SD.ProductAPIBase}/api/products/{productId}",
+                Url = new Uri(new Uri(SD.ProductAPIBase), $"api/products/{productId}").ToString(),
                 Method = SD.ApiType.DELETE,
                 AccessToken = ""
             });
@@ -37,7 +37,7 @@ namespace Mango.Web.Services
         {
             return await this.SendAsync<T>(new ApiRequest
             {
-                Url = $"{SD.ProductAPIBase}/api/products",
+                Url = new Uri(new Uri(SD.ProductAPIBase), "api/products").ToString(),
                 Method = SD.ApiType.GET,
                 AccessToken = ""
             });
@@ -47,7 +47,7 @@ namespace Mango.Web.Services
         {
             return await this.SendAsync<T>(new ApiRequest
             {
-                Url = $"{SD.ProductAPIBase}/api/products/{productId}",
+                Url = new Uri(new Uri(SD.ProductAPIBase), $"api/products/{productId}").ToString(),
                 Method = SD.ApiType.GET,
                 AccessToken = ""
             });
@@ -57,7 +57,7 @@ namespace Mango.Web.Services
         {
             return await this.SendAsync<T>(new ApiRequest
             {
-                Url = $"{SD.ProductAPIBase}/api/products",
+                Url = new Uri(new Uri(SD.ProductAPIBase), "api/products").ToString(),
                 Method = SD.ApiType.PUT,
                 AccessToken = "",
                 Data = productDto

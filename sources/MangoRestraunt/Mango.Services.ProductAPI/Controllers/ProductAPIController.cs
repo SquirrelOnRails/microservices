@@ -17,7 +17,7 @@ namespace Mango.Services.ProductAPI.Controllers
         [HttpGet]
         public async Task<ResponseDto> Get()
         {
-            var response = new ResponseDto<List<ProductDto>>();
+            var response = new ResponseDto();
 
             try
             {
@@ -36,7 +36,7 @@ namespace Mango.Services.ProductAPI.Controllers
         [HttpGet("{productId}")]
         public async Task<ResponseDto> Get(int productId)
         {
-            var response = new ResponseDto<ProductDto>();
+            var response = new ResponseDto();
 
             try
             {
@@ -55,7 +55,7 @@ namespace Mango.Services.ProductAPI.Controllers
         [HttpPost]
         public async Task<ResponseDto> Post([FromBody] ProductDto productDto)
         {
-            var response = new ResponseDto<ProductDto>();
+            var response = new ResponseDto();
 
             try
             {
@@ -74,7 +74,7 @@ namespace Mango.Services.ProductAPI.Controllers
         [HttpPut]
         public async Task<ResponseDto> Put([FromBody] ProductDto productDto)
         {
-            var response = new ResponseDto<ProductDto>();
+            var response = new ResponseDto();
 
             try
             {
@@ -96,7 +96,7 @@ namespace Mango.Services.ProductAPI.Controllers
         [HttpDelete("{productId}")]
         public async Task<ResponseDto> Delete(int productId)
         {
-            var response = new ResponseDto<bool>();
+            var response = new ResponseDto();
 
             try
             {

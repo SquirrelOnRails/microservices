@@ -1,5 +1,6 @@
 ﻿using Mango.Services.ProductAPI.Dto;
 using Mango.Services.ProductAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mango.Services.ProductAPI.Controllers
@@ -14,6 +15,7 @@ namespace Mango.Services.ProductAPI.Controllers
             _repository = repository;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ResponseDto> Get()
         {
@@ -33,6 +35,7 @@ namespace Mango.Services.ProductAPI.Controllers
             return response;
         }
 
+        [Authorize]
         [HttpGet("{productId}")]
         public async Task<ResponseDto> Get(int productId)
         {
@@ -52,6 +55,7 @@ namespace Mango.Services.ProductAPI.Controllers
             return response;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ResponseDto> Post([FromBody] ProductDto productDto)
         {
@@ -71,6 +75,7 @@ namespace Mango.Services.ProductAPI.Controllers
             return response;
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<ResponseDto> Put([FromBody] ProductDto productDto)
         {
@@ -93,6 +98,7 @@ namespace Mango.Services.ProductAPI.Controllers
             return response;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{productId}")]
         public async Task<ResponseDto> Delete(int productId)
         {

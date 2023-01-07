@@ -19,7 +19,7 @@ namespace Mango.Services.IdentityServer
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>
             {
-                new ApiScope("MangoAdmin", "Admin scope"),
+                new ApiScope("mango", "Admin scope"),
                 new ApiScope("read", "Scope to read the data"),
                 new ApiScope("write", "Scope to write the data"),
                 new ApiScope("delete", "Scope to delete the data")
@@ -45,10 +45,10 @@ namespace Mango.Services.IdentityServer
                         IdentityServerConstants.StandardScopes.OpenId, 
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        "MangoAdmin"
+                        "mango"
                     },
-                    RedirectUris = { "https://localhost:44337/signin-oidc" },
-                    PostLogoutRedirectUris = { "https://localhost:44337/signout-callback-oidc" }
+                    RedirectUris = { "https://localhost:7135/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:7135/signout-callback-oidc" }
                 }
             };
     }

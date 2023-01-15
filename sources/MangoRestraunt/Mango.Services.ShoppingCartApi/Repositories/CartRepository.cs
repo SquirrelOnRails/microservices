@@ -58,7 +58,7 @@ namespace Mango.Services.ShoppingCartApi.Repositories
                 if (dbProduct == null)
                     _dbContext.Products.Add(details.Product);
                 else
-                    _dbContext.Products.Update(details.Product);
+                    dbProduct = details.Product;
 
                 await _dbContext.SaveChangesAsync();
             }
@@ -104,6 +104,7 @@ namespace Mango.Services.ShoppingCartApi.Repositories
                     {
                         // otherwise update CartDetails's product count.
                         details.Count += dbCartDetails.Count;
+                        details.CartDetailsId = dbCartDetails.CartDetailsId;
                         _dbContext.CartDetails.Update(details);
                     }
                     await _dbContext.SaveChangesAsync();

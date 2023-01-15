@@ -1,7 +1,7 @@
 using AutoMapper;
-using Mango.Services.ProductAPI.AutoMapper;
-using Mango.Services.ProductAPI.DbContexts;
-using Mango.Services.ProductAPI.Repositories;
+using Mango.Services.ShoppingCartApi.AutoMapper;
+using Mango.Services.ShoppingCartApi.DbContexts;
+using Mango.Services.ShoppingCartApi.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -9,20 +9,20 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 #region services
-// Add services to the container.
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 IMapper mapper = MappingConfiguration.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 
+// Add services to the container.
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options => 
+    .AddJwtBearer("Bearer", options =>
     {
         options.Authority = builder.Configuration["ServiceUrls:IdentityServer"];
         options.TokenValidationParameters = new TokenValidationParameters
@@ -43,7 +43,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mango.Services.ProductAPI", Version = "1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mango.Services.ShoppingCartAPI", Version = "1" });
     c.EnableAnnotations();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {

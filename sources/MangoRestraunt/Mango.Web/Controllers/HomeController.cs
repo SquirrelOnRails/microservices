@@ -20,7 +20,7 @@ namespace Mango.Web.Controllers
         }
         private string GetUserId()
         {
-            return User.Claims.SingleOrDefault(u => u.Properties.Any(p => p.Value == "sub"))?.Value;
+            return User.Claims.SingleOrDefault(u => u.Type == "sub")?.Value;
         }
         
         public HomeController(ILogger<HomeController> logger, 

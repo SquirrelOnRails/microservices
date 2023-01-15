@@ -36,14 +36,13 @@ namespace Mango.Services.ShoppingCartApi.Controllers
             return _response;
         }
 
-        [HttpPost("AddCart")]
-        public async Task<object> AddCart([FromBody] CartDto cartDto)
+        [HttpPost("AddToCart")]
+        public async Task<object> AddToCart([FromBody] CartDto cartDto)
         {
             try
             {
                 var newCart = await _cartRepository.CreateUpdateCart(cartDto);
                 _response.Result = newCart;
-
             }
             catch (Exception e)
             {
@@ -54,7 +53,7 @@ namespace Mango.Services.ShoppingCartApi.Controllers
             return _response;
         }
 
-        [HttpPost("UpdateCart")]
+        [HttpPut("UpdateCart")]
         public async Task<object> UpdateCart([FromBody] CartDto cartDto)
         {
             try
@@ -72,8 +71,8 @@ namespace Mango.Services.ShoppingCartApi.Controllers
             return _response;
         }
 
-        [HttpPost("RemoveCart")]
-        public async Task<object> RemoveCart([FromBody] int cartDetailsId)
+        [HttpDelete("RemoveFromCart/{cartDetailsId}")]
+        public async Task<object> RemoveFromCart(int cartDetailsId)
         {
             try
             {
@@ -89,12 +88,12 @@ namespace Mango.Services.ShoppingCartApi.Controllers
             return _response;
         }
 
-        [HttpPost("ClearCart")]
-        public async Task<object> ClearCart([FromBody] string userId)
+        [HttpDelete("ClearCart/{cartHeaderId}")]
+        public async Task<object> ClearCart(int cartHeaderId)
         {
             try
             {
-                var clearResult = await _cartRepository.ClearCart(userId);
+                var clearResult = await _cartRepository.ClearCart(cartHeaderId);
                 _response.IsSuccess = clearResult;
             }
             catch (Exception e)

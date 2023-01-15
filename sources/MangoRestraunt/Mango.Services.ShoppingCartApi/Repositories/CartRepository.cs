@@ -14,7 +14,7 @@ namespace Mango.Services.ShoppingCartApi.Repositories
 
         Task<bool> RemoveFromCart(int cartDetailsId);
 
-        Task<bool> ClearCart(string userId);
+        Task<bool> ClearCart(int cartHeaderId);
     }
 
     public class CartRepository : ICartRepository
@@ -28,9 +28,9 @@ namespace Mango.Services.ShoppingCartApi.Repositories
             _mapper = mapper;
         }
 
-        public async Task<bool> ClearCart(string userId)
+        public async Task<bool> ClearCart(int cartHeaderId)
         {
-            var dbCartHeader = await _dbContext.CartHeaders.FirstOrDefaultAsync(h => h.UserId == userId);
+            var dbCartHeader = await _dbContext.CartHeaders.SingleOrDefaultAsync(h => h.CartHeaderId == cartHeaderId);
             if (dbCartHeader != null)
             {
                 var detailsToDelete = _dbContext.CartDetails.Where(d => d.CartHeaderId == dbCartHeader.CartHeaderId);

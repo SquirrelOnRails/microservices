@@ -27,7 +27,7 @@ namespace Mango.Web.Services
         {
             return await SendAsync<T>(new ApiRequest
             {
-                Url = new Uri(new Uri(SD.ShoppingCartAPIBase), "/api/cart/ClearCart/{cartHeaderId}").ToString(),
+                Url = new Uri(new Uri(SD.ShoppingCartAPIBase), $"/api/cart/ClearCart/{cartHeaderId}").ToString(),
                 AccessToken = token,
                 Method = SD.ApiType.DELETE
             });
@@ -37,7 +37,7 @@ namespace Mango.Web.Services
         {
             return await SendAsync<T>(new ApiRequest
             {
-                Url = new Uri(new Uri(SD.ShoppingCartAPIBase), "/api/cart/GetCart/{userId}").ToString(),
+                Url = new Uri(new Uri(SD.ShoppingCartAPIBase), $"/api/cart/GetCart/{userId}").ToString(),
                 AccessToken = token,
                 Method = SD.ApiType.GET
             });
@@ -47,7 +47,7 @@ namespace Mango.Web.Services
         {
             return await SendAsync<T>(new ApiRequest
             {
-                Url = new Uri(new Uri(SD.ShoppingCartAPIBase), "/api/cart/RemoveFromCart/{cartDetailsId}").ToString(),
+                Url = new Uri(new Uri(SD.ShoppingCartAPIBase), $"/api/cart/RemoveFromCart/{cartDetailsId}").ToString(),
                 AccessToken = token,
                 Method = SD.ApiType.DELETE
             });

@@ -2,10 +2,13 @@ using Mango.Web;
 using Mango.Web.Services;
 using Mango.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 #region dependencies
+IdentityModelEventSource.ShowPII = true;
+
 // Add services to the container.
 builder.Services.AddHttpClient<IProductService, ProductService>();
 builder.Services.AddHttpClient<IShoppingCartService, ShoppingCartService>();

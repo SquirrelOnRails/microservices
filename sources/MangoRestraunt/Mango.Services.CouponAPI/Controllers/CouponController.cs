@@ -23,7 +23,7 @@ namespace Mango.Services.CouponAPI.Controllers
         {
             try
             {
-                var coupon = _couponRepository.GetCouponByCode(code);
+                var coupon = await _couponRepository.GetCouponByCode(code);
                 _response.Result = coupon;
             }
             catch (Exception e)

@@ -23,6 +23,17 @@ namespace Mango.Web.Services
             });
         }
 
+        public async Task<T> ApplyCouponAsync<T>(CartDto cart, string token)
+        {
+            return await SendAsync<T>(new ApiRequest
+            {
+                Url = new Uri(new Uri(SD.ShoppingCartAPIBase), "/api/cart/ApplyCoupon").ToString(),
+                AccessToken = token,
+                Method = SD.ApiType.POST,
+                Data = cart
+            });
+        }
+
         public async Task<T> ClearCartAsync<T>(int cartHeaderId, string token)
         {
             return await SendAsync<T>(new ApiRequest
@@ -40,6 +51,16 @@ namespace Mango.Web.Services
                 Url = new Uri(new Uri(SD.ShoppingCartAPIBase), $"/api/cart/GetCart/{userId}").ToString(),
                 AccessToken = token,
                 Method = SD.ApiType.GET
+            });
+        }
+
+        public async Task<T> RemoveCouponAsync<T>(string userId, string token)
+        {
+            return await SendAsync<T>(new ApiRequest
+            {
+                Url = new Uri(new Uri(SD.ShoppingCartAPIBase), $"/api/cart/RemoveCoupon/{userId}").ToString(),
+                AccessToken = token,
+                Method = SD.ApiType.DELETE
             });
         }
 

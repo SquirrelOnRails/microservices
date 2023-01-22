@@ -15,6 +15,10 @@ namespace Mango.Services.ShoppingCartApi.Repositories
         Task<bool> RemoveFromCart(int cartDetailsId);
 
         Task<bool> ClearCart(int cartHeaderId);
+
+        Task<bool> ApplyCoupon(string userId, string couponCode);
+        
+        Task<bool> RemoveCoupon(string userId);
     }
 
     public class CartRepository : ICartRepository
@@ -26,6 +30,21 @@ namespace Mango.Services.ShoppingCartApi.Repositories
         {
             _dbContext = dbContext;
             _mapper = mapper;
+        }
+
+        public async Task<bool> ApplyCoupon(string userId, string couponCode)
+        {
+            try
+            {
+                var dbCart = await _dbContext.CartHeaders.SingleOrDefaultAsync(h => h.UserId == userId);
+                dbCart.CouponCode = couponCode;
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
 
         public async Task<bool> ClearCart(int cartHeaderId)
@@ -130,6 +149,21 @@ namespace Mango.Services.ShoppingCartApi.Repositories
             }
             
             return null;
+        }
+
+        public async Task<bool> RemoveCoupon(string userId)
+        {
+            try
+            {
+                var dbCart = await _dbContext.CartHeaders.SingleOrDefaultAsync(h => h.UserId == userId);
+                dbCart.CouponCode = null;
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
 
         public async Task<bool> RemoveFromCart(int cartDetailsId)
